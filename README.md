@@ -15,7 +15,8 @@ This project is useful for organizations that want to automate their incident re
 ## Getting started
 
 ### Architecture flows
-![Architecture](https://raw.githubusercontent.com/mrphuongbn/aws-ecs-incident-response-framework/main/docs/incident-response-framework-flow.png)
+
+![](https://raw.githubusercontent.com/mrphuongbn/aws-ecs-incident-response-framework/main/docs/incident-response-framework-flow.png)
 
 ### Prerequisites
 
