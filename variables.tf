@@ -70,3 +70,13 @@ variable "ecs_service_names" {
   type        = list(string)
   default     = []
 }
+
+variable "email_receiver" {
+  description = "Email address to receive incident findings"
+  type        = string
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", var.email_receiver))
+    error_message = "Invalid email format for email_receiver."
+  }
+}

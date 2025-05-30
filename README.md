@@ -39,7 +39,7 @@ module "alb_incident_response" {
 
   ecs_cluster_name  = "prodapp-ecs-cluster"
   ecs_service_names = ["service1", "service2", "service3"] # or empty for all services
-  # (Optionally existing SNS ARNs or other configs)
+  # (Optionally existing SNS ARNs, email_receiver or other configs)
 }
 ```
 
@@ -74,6 +74,7 @@ No modules.
 | [aws_s3_bucket.analysis_results](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_sns_topic.alarm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic) | resource |
 | [aws_sns_topic.findings](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic) | resource |
+| [aws_sns_topic_subscription.email_receiver](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription) | resource |
 | [aws_sns_topic_subscription.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription) | resource |
 | [null_resource.lambda_build](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 
@@ -85,6 +86,7 @@ No modules.
 | <a name="input_bedrock_model_id"></a> [bedrock\_model\_id](#input\_bedrock\_model\_id) | ID of the Bedrock foundation model to invoke | `string` | `"amazon.titan-text-express-v1"` | no |
 | <a name="input_ecs_cluster_name"></a> [ecs\_cluster\_name](#input\_ecs\_cluster\_name) | The name of the ECS cluster to inspect | `string` | n/a | yes |
 | <a name="input_ecs_service_names"></a> [ecs\_service\_names](#input\_ecs\_service\_names) | List of ECS service names to inspect (optional). If empty, inspect entire cluster. | `list(string)` | `[]` | no |
+| <a name="input_email_receiver"></a> [email\_receiver](#input\_email\_receiver) | Email address to receive incident findings | `string` | n/a | yes |
 | <a name="input_error_threshold"></a> [error\_threshold](#input\_error\_threshold) | 5XX count threshold for CloudWatch alarm | `number` | `5` | no |
 | <a name="input_evaluation_periods"></a> [evaluation\_periods](#input\_evaluation\_periods) | Number of periods to evaluate for the alarm | `number` | `2` | no |
 | <a name="input_existing_findings_topic_arn"></a> [existing\_findings\_topic\_arn](#input\_existing\_findings\_topic\_arn) | Optional existing SNS topic ARN for incident reports. If not provided, a new topic will be created. | `string` | `""` | no |

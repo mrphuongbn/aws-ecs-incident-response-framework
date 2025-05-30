@@ -116,6 +116,14 @@ resource "aws_sns_topic" "findings" {
   name  = "${var.name_prefix}-findings-topic"
 }
 
+# SNS topic subscription, email receiver, for incident findings
+resource "aws_sns_topic_subscription" "email_receiver" {
+  count     = var.existing_findings_topic_arn == "" ? 1 : 0
+  topic_arn = aws_sns_topic.findings[0].arn
+  protocol  = "email"
+  endpoint  = var.email_receiver # Email address to receive incident findings
+}
+
 # S3 bucket for storing incident analysis results
 resource "aws_s3_bucket" "analysis_results" {
   bucket_prefix = "${var.name_prefix}-incident-analysis-"
