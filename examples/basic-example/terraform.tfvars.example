@@ -1,0 +1,5 @@
+aws_region       = "us-east-1"
+name_prefix      = "my-app"
+alb_name         = "app/my-alb/50abc123def"
+ecs_cluster_name = "my-ecs-cluster"
+email_receiver   = "devops-team@company.com"

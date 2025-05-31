@@ -1,0 +1,20 @@
+aws_region         = "us-east-1"
+environment        = "prod"
+name_prefix        = "prodapp"
+alb_name          = "app/prodapp-alb/50abc123def"
+ecs_cluster_name  = "prodapp-ecs-cluster"
+ecs_service_names = ["web-service", "api-service", "worker-service"]
+email_receiver    = "devops-team@company.com"
+admin_email       = "admin@company.com"
+
+# Alarm configuration
+error_threshold    = 50
+evaluation_periods = 3
+period            = 300
+
+# AI model configuration
+bedrock_model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
+
+# SNS configuration
+create_existing_sns_topic = true
+use_existing_sns_topic    = true
