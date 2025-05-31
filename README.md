@@ -28,7 +28,7 @@ This project is useful for organizations that want to automate their incident re
 ### Example Terraform Module Usage
 
 ```hcl
-module "alb_incident_response" {
+module "ecs_incident_response" {
   source            = "github.com/mrphuongbn/aws-ecs-incident-response-framework"
   name_prefix       = "prodapp"
   alb_name          = "app/prodapp-alb/50abc123def"

@@ -1,7 +1,15 @@
-import boto3
+"""
+AWS Bedrock helper module for ECS incident analysis.
+
+This module provides functionality to analyze ECS incident data using AWS Bedrock
+and store the analysis results in S3.
+"""
+
 import json
 import os
 from datetime import datetime
+
+import boto3
 
 bedrock = boto3.client('bedrock-runtime')
 s3 = boto3.client('s3')
@@ -9,7 +17,18 @@ s3 = boto3.client('s3')
 # Get bucket name from environment variable
 BUCKET_NAME = os.environ.get('ANALYSIS_BUCKET_NAME')
 
+
 def invoke_bedrock_analysis(context_data, model_id):
+    """
+    Analyze ECS incident data using AWS Bedrock and store results in S3.
+    
+    Args:
+        context_data (dict): Dictionary containing incident metrics, logs, and traces
+        model_id (str): AWS Bedrock model ID to use for analysis
+        
+    Returns:
+        dict: Dictionary containing analysis results and S3 location
+    """
     # Format prompt for plaintext response
     prompt = f"""
 Analyze this AWS ECS incident and provide a detailed plaintext report:
@@ -47,7 +66,7 @@ Format your response as a plaintext report with clear section headers.
 
     # Parse response - format depends on the model
     response_body = json.loads(response['body'].read())
-    
+
     # Different models return different JSON structures
     if 'completion' in response_body:
         analysis = response_body['completion']
@@ -70,7 +89,8 @@ Format your response as a plaintext report with clear section headers.
                 ContentType='text/plain'
             )
             s3_location = f"s3://{BUCKET_NAME}/{key}"
-        except Exception as e:
+        except (s3.exceptions.NoSuchBucket, s3.exceptions.NoCredentialsError,
+                s3.exceptions.BucketOperationError) as e:
             s3_location = f"Error storing in S3: {str(e)}"
     else:
         s3_location = "No S3 bucket configured"
