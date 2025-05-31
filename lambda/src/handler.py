@@ -21,13 +21,13 @@ SNS_TOPIC_ARN = os.environ['SNS_TOPIC_ARN']
 MODEL_ID = os.environ['MODEL_ID']
 ECS_CLUSTER_NAME = os.environ['ECS_CLUSTER_NAME']
 ECS_SERVICE_NAMES = (
-    os.environ.get('ECS_SERVICE_NAMES', '').split(',') 
+    os.environ.get('ECS_SERVICE_NAMES', '').split(',')
     if os.environ.get('ECS_SERVICE_NAMES') else []
 )
 
 sns_client = boto3.client('sns')
 
-def handler(event, context):
+def handler(event, context):  # pylint: disable=unused-argument
     """
     AWS Lambda handler for processing CloudWatch alarm events.
     

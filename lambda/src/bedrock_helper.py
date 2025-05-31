@@ -79,7 +79,7 @@ Format your response as a plaintext report with clear section headers.
     timestamp = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
     cluster_name = context_data['cluster']
     key = f"incidents/{cluster_name}/{timestamp}.txt"
-    
+
     if BUCKET_NAME:
         try:
             s3.put_object(
