@@ -1,5 +1,11 @@
 # Introduction
 
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![Terraform](https://img.shields.io/badge/terraform-%3E%3D1.3-blueviolet)
+
+The module provides a repeatable incident response framework. When the ALB's 5XX error count crosses the defined threshold, the system automatically gathers the context, leverages generative AI to diagnose the issue, and notifies teams with a concise report – turning raw alarms into actionable insightsntroduction
+
 The module provides a repeatable incident response framework. When the ALB’s 5XX error count crosses the defined threshold, the system automatically gathers the context, leverages generative AI to diagnose the issue, and notifies teams with a concise report – turning raw alarms into actionable insights
 
 ## Why is this project useful?

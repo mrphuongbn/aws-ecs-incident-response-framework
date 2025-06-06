@@ -1,0 +1,116 @@
+# Ruff configuration for AWS ECS Incident Response Framework
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    "lambda/package",  # Exclude Lambda deployment package
+]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+# Assume Python 3.8+ (lowest version we support)
+target-version = "py38"
+
+[lint]
+# Enable a comprehensive set of rules
+select = [
+    # Pyflakes
+    "F",
+    # pycodestyle
+    "E",
+    "W", 
+    # isort
+    "I",
+    # pydocstyle
+    "D",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # flake8-comprehensions
+    "C4",
+    # flake8-unused-arguments
+    "ARG",
+    # flake8-use-pathlib
+    "PTH",
+    # Ruff-specific rules
+    "RUF",
+]
+
+ignore = [
+    # Allow non-lowercase variable names (for AWS conventions)
+    "N806",
+    # Allow builtin attribute shadowing (common in AWS boto3)
+    "A003",
+    # Allow TODO comments
+    "FIX002",
+    # Allow print statements (useful for Lambda logging)
+    "T201",
+    # Allow assert statements
+    "S101",
+    # Ignore missing docstring in public module (we have them at the top)
+    "D100",
+    # Ignore missing docstring in __init__ methods
+    "D107",
+    # Allow relative imports
+    "TID252",
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[lint.per-file-ignores]
+# Allow unused imports in __init__.py files
+"__init__.py" = ["F401"]
+# Allow star imports in Lambda handler (common pattern)
+"lambda/src/handler.py" = ["F403", "F405", "ARG001"]
+
+[lint.pydocstyle]
+# Use Google-style docstrings (which we're already using)
+convention = "google"
+
+[format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
